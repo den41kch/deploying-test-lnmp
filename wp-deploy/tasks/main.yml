@@ -1,0 +1,7 @@
+- include_tasks: create-user.yml
+
+- include_tasks: create-db.yml
+
+- include_tasks: vhost.yml
+
+- include_tasks: install-wp.yml

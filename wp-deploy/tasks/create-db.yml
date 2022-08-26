@@ -1,0 +1,18 @@
+- name: Create a new database with name 'DOMAIN_NAME_DB'
+  mysql_db:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{name_db}}"
+    state: present
+
+- name: add user DOMAIN_NAME_USR
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host: localhost
+    name: "{{user_db}}"
+    password: "{{password_user_db}}"
+    priv: '{{name_db}}.*:ALL,GRANT'
+    state: present

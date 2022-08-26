@@ -1,0 +1,5 @@
+- include_tasks: ssh.yml
+
+- include_tasks: default-settings.yml 
+
+- include_tasks: csf.yml

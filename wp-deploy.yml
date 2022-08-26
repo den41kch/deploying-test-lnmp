@@ -1,0 +1,5 @@
+- name: wp-deploy.
+  hosts: test
+  become: yes
+  roles:
+    - wp-deploy

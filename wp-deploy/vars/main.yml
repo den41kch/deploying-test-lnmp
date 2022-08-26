@@ -1,0 +1,6 @@
+DOMAIN_NAME: wp.example.com
+user_password: userpass
+mysql_root_password: myrootpass
+name_db: wp
+user_db: wp
+password_user_db: userdbpass

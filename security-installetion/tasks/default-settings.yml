@@ -1,0 +1,6 @@
+- name: update repo.
+  shell: apt update
+
+- name: install default app.
+  shell:
+    cmd: "apt install -y  iotop htop python3-pip tcpdump nmap curl  zip unzip perl libwww-perl liblwp-protocol-https-perl sendmail-bin pwgen  parted  bzip2 net-tools  mutt  smartmontools tree dnsutils logrotate"

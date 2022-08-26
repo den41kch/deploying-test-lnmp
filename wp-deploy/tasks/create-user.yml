@@ -1,0 +1,19 @@
+
+  - name: add user
+    user:
+      name: "{{ DOMAIN_NAME }}"
+      password: "{{ user_password | password_hash('sha512') }}"
+      group: "www-data"
+      state: present
+      update_password: on_create
+      home: "/var/www/{{ DOMAIN_NAME }}"
+      shell: /bin/bash
+
+  - name: create home directory
+    file:
+      path: "/var/www/{{ DOMAIN_NAME }}"
+      owner: "{{ DOMAIN_NAME }}"
+      group: "www-data"
+      mode: 0751
+      state: directory
+

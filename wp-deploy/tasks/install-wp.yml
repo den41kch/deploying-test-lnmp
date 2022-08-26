@@ -1,0 +1,23 @@
+- name: downloading latest WP
+  get_url:
+    url:  'https://wordpress.org/latest.zip'
+    dest: '/var/www/{{ DOMAIN_NAME }}/wp.zip'
+
+- name: unpack WP
+  unarchive:
+    src:  '/var/www/{{ DOMAIN_NAME }}/wp.zip'
+    dest: '/var/www/{{ DOMAIN_NAME }}'
+    remote_src: yes
+
+- name: remove wp.zip
+  file:
+    path: /var/www/wp.example.com/wp.zip
+    path: '/var/www/{{ DOMAIN_NAME }}/wp.zip'
+    state: absent
+
+- name: move wp files to /
+  shell: mv /var/www/{{ DOMAIN_NAME }}/wordpress/* /var/www/{{ DOMAIN_NAME }}
+  shell: mv /var/www/wp.example.com/wordpress/* /var/www/wp.example.com
+
+- name: push wp-config
+  template: src=templates/wp-config.php dest=/var/www/{{ DOMAIN_NAME }}/wp-config.php owner={{ DOMAIN_NAME }} group=www-data mode=0644

@@ -1,0 +1,45 @@
+- name: create home directory
+  file:
+    path: "/root/tmp/csf"
+    owner: "root"
+    group: "root"
+    mode: 0751
+    state: directory
+
+
+- name: downloading csf
+  get_url:
+    url:  'https://download.configserver.com/csf.tgz'
+    dest: '/root/tmp/csf.tgz'
+
+- name: unpack csf.tgz
+  unarchive:
+    src:  '/root/tmp/csf.tgz'
+    dest: '/root/tmp'
+    remote_src: yes
+
+- name: run CSF installer
+  command: sh install.sh
+  args:
+    chdir: '/root/tmp/csf' 
+    creates: /root/csf/csf.conf
+  
+- name: clearing iptables
+  command: sh remove_apf_bfd.sh
+  args:
+    chdir: '/usr/local/csf/bin/'
+
+- name: push csf.conf
+  copy: src=templates/csf.conf dest=/etc/csf/csf.conf mode=0640
+
+- name: ip whitelist
+  copy: content="{{ ssh_whitelist }}" dest=/etc/csf/csf.allow
+
+- name: apply csf rules
+  command: csf -r
+
+- name: start csf service
+  service:
+    name: csf
+    state: started
+    enabled: yes

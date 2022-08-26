@@ -1,0 +1,21 @@
+
+- name: remove default sshd_config    
+  file:
+    path: /etc/ssh/sshd_config
+    state: absent
+
+- name: push sshd_config
+  copy: src=templates/sshd_config dest=/etc/ssh/sshd_config mode=0640
+
+- name: push rsa key
+  copy: src=/root/.ssh/id_rsa.pub dest=/root/.ssh/authorized_keys mode=0640
+
+- name: disable ufw
+  service:
+    name: ufw
+    state: stopped
+    enabled: no
+
+- name: restart sshd
+  service: name=sshd state=restarted
+    

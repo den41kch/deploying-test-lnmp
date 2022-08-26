@@ -1,0 +1,3 @@
+---
+# vars file for secure-instalation-web
+mysql_root_password: myrootpass

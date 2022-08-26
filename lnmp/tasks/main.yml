@@ -1,0 +1,5 @@
+- include_tasks: nginx-install.yml
+
+- include_tasks:  php-fpm-install.yml
+
+- include_tasks:  mysql-install.yml

@@ -1,0 +1,5 @@
+[new]
+web1 ansible_ssh_host=192.168.5.40 ansible_ssh_user=user  ansible_ssh_pass=password ansible_sudo_pass=password
+
+[test]
+web12 ansible_ssh_host=192.168.5.40 ansible_port=1234 ansible_ssh_user=root ansible_ssh_private_key_file=/root/.ssh/id_rsa

@@ -1,0 +1,2 @@
+  - name: update repo.
+    shell: apt install software-properties-common && add-apt-repository ppa:ondrej/php -y && apt update 

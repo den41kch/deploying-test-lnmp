@@ -1,0 +1,5 @@
+- name: security-installetion.  
+  hosts: test  
+  become: yes
+  roles:
+    - security-installetion

@@ -1,0 +1,5 @@
+- name: install LNMP.  
+  hosts: test  
+  become: yes
+  roles:
+    - lnmp

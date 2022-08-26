@@ -1,0 +1,11 @@
+- name: push nginx virtual host config
+  template: src=templates/vhost.conf dest=/etc/nginx/sites-available/{{ DOMAIN_NAME }} owner=root group=root mode=0644
+
+- name: enable virtual host
+  shell: ln -s /etc/nginx/sites-available/{{ DOMAIN_NAME }} /etc/nginx/sites-enabled/{{ DOMAIN_NAME }}
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
